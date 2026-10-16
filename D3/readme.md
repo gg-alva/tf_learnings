@@ -40,3 +40,31 @@ default = [ "gaustorageacc11", "gaustorageacc12", "gaustorageacc13", "gaustorage
 
 count                    = length(var.storage_name) --> count=5
 
+<hr>
+
+## for_each
+```
+variable "storage_name_foreach" {
+  type = set(string)
+  description = "value"
+  default = [ "gaustorageacc11", "gaustorageacc12", "gaustorageacc13", "gaustorageacc14", "gaustorageacc15"]
+}
+```
+```
+resource "azurerm_storage_account" "example" {
+  for_each                    = var.storage_name_foreach
+  name                     = each.value
+  resource_group_name      = azurerm_resource_group.example.name
+  location                 = azurerm_resource_group.example.location
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+
+  tags = {
+    environment = var.environment
+  }
+}
+```
+this creates the storage account with the name defined in the set of variables 
+for_each only accepts the set or string type 
+<hr>
+
