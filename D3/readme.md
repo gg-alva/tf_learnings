@@ -67,4 +67,10 @@ resource "azurerm_storage_account" "example" {
 this creates the storage account with the name defined in the set of variables 
 for_each only accepts the set or string type 
 <hr>
+## Lifectcle Rules
+- Create before destroy --> we need to provide a conditioin that we need to have the resources before the existing resources is deleted.
+- prevent destroy -->  the restriction not to change the resources
+- ignore changes --> makes sure that no changes are made until in the code
+- replace triggered by
+- custom condition
 
